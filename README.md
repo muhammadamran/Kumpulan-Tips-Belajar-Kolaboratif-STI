@@ -1,0 +1,2 @@
+saya akan lawan 
+

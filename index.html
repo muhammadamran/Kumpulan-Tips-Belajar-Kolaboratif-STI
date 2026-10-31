@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Utama</title>
+    <title>Halaman Utama - Dashboard</title>
     <style>
-        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -35,6 +34,12 @@
             font-weight: bold;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -45,11 +50,36 @@
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.2s;
         }
 
-        nav a:hover {
-            opacity: 0.8;
+        /* User Profile Info on Header */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .btn-logout {
+            color: #ffb3b3;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-left: 5px;
         }
 
         /* Main Content */
@@ -61,7 +91,7 @@
 
         .hero {
             text-align: center;
-            padding: 4rem 1rem;
+            padding: 3rem 1rem;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -69,30 +99,25 @@
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
             color: #1a1a1a;
         }
 
         .hero p {
             font-size: 1.1rem;
             color: #666;
-            margin-bottom: 1.5rem;
         }
 
-        .btn {
+        .role-badge {
             display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.2s;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
         }
 
         /* Features Section */
@@ -114,7 +139,6 @@
             color: #007bff;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 1.5rem;
@@ -132,31 +156,32 @@
             <ul>
                 <li><a href="index.html">Beranda</a></li>
                 <li><a href="#fitur">Fitur</a></li>
-                <li><a href="#tentang">Tentang</a></li>
-                <li><a href="#kontak">Kontak</a></li>
             </ul>
+
+            <!-- Informasi Pengguna Login di Header -->
+            <div class="user-profile">
+                <div class="avatar" id="user-avatar">A</div>
+                <span>Halo, <strong id="header-username">Administrator</strong></span>
+                <a href="#logout" class="btn-logout">(Keluar)</a>
+            </div>
         </nav>
     </header>
 
     <main>
         <section class="hero">
-            <h1>Selamat Datang di Website Kami</h1>
-            <p>Platform terbaik untuk menemukan solusi digital kebutuhan Anda.</p>
-            <a href="#kontak" class="btn">Mulai Sekarang</a>
+            <!-- Salam Personal Berdasarkan Pengguna -->
+            <h1>Selamat Datang Kembali, <span id="welcome-username" style="color: #007bff;">Administrator</span>! 👋</h1>
+            <p>Anda login sebagai: <span class="role-badge" id="user-role">Administrator System</span></p>
         </section>
 
         <section id="fitur" class="features">
             <div class="card">
-                <h3>Fitur 1</h3>
-                <p>Deskripsi singkat mengenai layanan atau fitur utama yang ditawarkan.</p>
+                <h3>Menu Akses</h3>
+                <p>Fitur ini disesuaikan khusus untuk hak akses akun Anda.</p>
             </div>
             <div class="card">
-                <h3>Fitur 2</h3>
-                <p>Deskripsi singkat mengenai layanan atau fitur utama yang ditawarkan.</p>
-            </div>
-            <div class="card">
-                <h3>Fitur 3</h3>
-                <p>Deskripsi singkat mengenai layanan atau fitur utama yang ditawarkan.</p>
+                <h3>Aktivitas Terakhir</h3>
+                <p>Login terakhir Anda terdeteksi pada hari ini.</p>
             </div>
         </section>
     </main>
@@ -165,5 +190,26 @@
         <p>&copy; 2026 WebsiteKu. All rights reserved.</p>
     </footer>
 
+    <!-- Script Opsional: Untuk Mengambil Data Pengguna dari Session/LocalStorage -->
+    <script>
+        // Simulasi mengambil data user yang sedang login (bisa diganti dari backend/sessionStorage)
+        const currentUser = {
+            name: "Budi Santoso",
+            role: "Pengguna / Member"
+        };
+
+        // Fungsi untuk mengupdate tampilan nama user
+        function loadUserProfile() {
+            document.getElementById('header-username').textContent = currentUser.name;
+            document.getElementById('welcome-username').textContent = currentUser.name;
+            document.getElementById('user-role').textContent = currentUser.role;
+            
+            // Inisial untuk Avatar (huruf pertama nama)
+            document.getElementById('user-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
+        }
+
+        // Jalankan fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', loadUserProfile);
+    </script>
 </body>
 </html>
